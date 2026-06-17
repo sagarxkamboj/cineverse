@@ -1,0 +1,8 @@
+com\cineverse\movie\repository\MovieRepository.class
+com\cineverse\movie\config\DatabaseSeeder.class
+com\cineverse\movie\entity\Movie.class
+com\cineverse\movie\controller\MovieController.class
+com\cineverse\movie\CineverseMovieApplication.class
+com\cineverse\movie\controller\ReviewController.class
+com\cineverse\movie\repository\ReviewRepository.class
+com\cineverse\movie\entity\Review.class

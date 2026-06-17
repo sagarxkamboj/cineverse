@@ -1,0 +1,87 @@
+services:
+  # 1. Auth Service
+  - type: web
+    name: auth-service
+    env: docker
+    dockerContext: backend
+    dockerfilePath: auth-service/Dockerfile
+    plan: free
+    envVars:
+      - key: DB_URL
+        value: jdbc:postgresql://ep-dark-band-at96vpof.c-9.us-east-1.aws.neon.tech/neondb?sslmode=require
+      - key: DB_USERNAME
+        value: neondb_owner
+      - key: DB_PASSWORD
+        value: npg_uyz4owFqB0LE
+      - key: JWT_SECRET
+        value: 9a4f2c8d3b7a1e6f45c8a0b3f267d8b1d4e6f3c8a9d2b5f8e3a9c8b5f6v8a3d9
+      - key: CORS_ALLOWED_ORIGINS
+        value: "*"
+
+  # 2. Movie Service
+  - type: web
+    name: movie-service
+    env: docker
+    dockerContext: backend
+    dockerfilePath: movie-service/Dockerfile
+    plan: free
+    envVars:
+      - key: MONGO_URI
+        value: mongodb+srv://sagarxkamboj:sagarxkambojmongodb@cluster0.dibxgsx.mongodb.net/cineverse?retryWrites=true&w=majority&appName=Cluster0
+      - key: CORS_ALLOWED_ORIGINS
+        value: "*"
+
+  # 3. Booking Service
+  - type: web
+    name: booking-service
+    env: docker
+    dockerContext: backend
+    dockerfilePath: booking-service/Dockerfile
+    plan: free
+    envVars:
+      - key: DB_URL
+        value: jdbc:postgresql://ep-dark-band-at96vpof.c-9.us-east-1.aws.neon.tech/neondb?sslmode=require
+      - key: DB_USERNAME
+        value: neondb_owner
+      - key: DB_PASSWORD
+        value: npg_uyz4owFqB0LE
+      - key: REDIS_HOST
+        value: clean-katydid-150363.upstash.io
+      - key: REDIS_PORT
+        value: "6379"
+      - key: REDIS_PASSWORD
+        value: gQAAAAAAAktbAAIgcDI3MmMyNmYwOWYwMmM0MTJjYWZiMzkzYTc2MGZjNjVmYg
+      - key: RABBITMQ_URL
+        value: amqps://bjfpsicq:GvGmz_AjSvl09SaX_rTJcA0AXe_egtoy@fuji.lmq.cloudamqp.com/bjfpsicq
+      - key: JWT_SECRET
+        value: 9a4f2c8d3b7a1e6f45c8a0b3f267d8b1d4e6f3c8a9d2b5f8e3a9c8b5f6v8a3d9
+      - key: CORS_ALLOWED_ORIGINS
+        value: "*"
+
+  # 4. Notification Service
+  - type: web
+    name: notification-service
+    env: docker
+    dockerContext: backend
+    dockerfilePath: notification-service/Dockerfile
+    plan: free
+    envVars:
+      - key: RABBITMQ_URL
+        value: amqps://bjfpsicq:GvGmz_AjSvl09SaX_rTJcA0AXe_egtoy@fuji.lmq.cloudamqp.com/bjfpsicq
+
+  # 5. API Gateway
+  - type: web
+    name: api-gateway
+    env: docker
+    dockerContext: backend
+    dockerfilePath: api-gateway/Dockerfile
+    plan: free
+    envVars:
+      - key: AUTH_SERVICE_URI
+        value: http://auth-service:8081
+      - key: MOVIE_SERVICE_URI
+        value: http://movie-service:8082
+      - key: BOOKING_SERVICE_URI
+        value: http://booking-service:8083
+      - key: JWT_SECRET
+        value: 9a4f2c8d3b7a1e6f45c8a0b3f267d8b1d4e6f3c8a9d2b5f8e3a9c8b5f6v8a3d9
