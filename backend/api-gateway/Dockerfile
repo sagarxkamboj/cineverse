@@ -2,19 +2,15 @@
 FROM maven:3.9-eclipse-temurin-17 AS build
 WORKDIR /app
 
-# Copy pom files
-COPY pom.xml .
-COPY auth-service/pom.xml auth-service/
-COPY movie-service/pom.xml movie-service/
-COPY booking-service/pom.xml booking-service/
-COPY notification-service/pom.xml notification-service/
-COPY api-gateway/pom.xml api-gateway/
+# Copy parent pom
+COPY backend/pom.xml .
 
-# Copy sources for api-gateway
-COPY api-gateway/src api-gateway/src
+# Copy api-gateway
+COPY backend/api-gateway api-gateway
 
 # Compile and package api-gateway
-RUN mvn -pl api-gateway -am clean package -DskipTests
+WORKDIR /app/api-gateway
+RUN mvn clean package -DskipTests
 
 # Run Stage
 FROM eclipse-temurin:17-jre-alpine

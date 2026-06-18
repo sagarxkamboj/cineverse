@@ -3,8 +3,8 @@ services:
   - type: web
     name: auth-service
     env: docker
-    dockerContext: backend
-    dockerfilePath: auth-service/Dockerfile
+    dockerContext: .
+    dockerfilePath: backend/auth-service/Dockerfile
     plan: free
     envVars:
       - key: JAVA_OPTS
@@ -24,8 +24,8 @@ services:
   - type: web
     name: movie-service
     env: docker
-    dockerContext: backend
-    dockerfilePath: movie-service/Dockerfile
+    dockerContext: .
+    dockerfilePath: backend/movie-service/Dockerfile
     plan: free
     envVars:
       - key: JAVA_OPTS
@@ -39,8 +39,8 @@ services:
   - type: web
     name: booking-service
     env: docker
-    dockerContext: backend
-    dockerfilePath: booking-service/Dockerfile
+    dockerContext: .
+    dockerfilePath: backend/booking-service/Dockerfile
     plan: free
     envVars:
       - key: JAVA_OPTS
@@ -68,8 +68,8 @@ services:
   - type: web
     name: notification-service
     env: docker
-    dockerContext: backend
-    dockerfilePath: notification-service/Dockerfile
+    dockerContext: .
+    dockerfilePath: backend/notification-service/Dockerfile
     plan: free
     envVars:
       - key: JAVA_OPTS
@@ -81,8 +81,8 @@ services:
   - type: web
     name: api-gateway
     env: docker
-    dockerContext: backend
-    dockerfilePath: api-gateway/Dockerfile
+    dockerContext: .
+    dockerfilePath: backend/api-gateway/Dockerfile
     plan: free
     envVars:
       - key: JAVA_OPTS
